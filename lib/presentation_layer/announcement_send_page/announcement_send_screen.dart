@@ -1,4 +1,4 @@
-import 'package:class_alert/presentation_layer/announcement_send_page/widgets/nnouncement_send_field.dart';
+import 'package:class_alert/presentation_layer/announcement_send_page/widgets/announcement_send_field.dart';
 import 'package:class_alert/presentation_layer/create_announcement_page/widgets/announcement_sessions.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class AnnouncementMessageSendScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100.0,
-        leading: null,
+        automaticallyImplyLeading: false,
         title: Column(
           children: [
             Row(
@@ -47,13 +47,12 @@ class AnnouncementMessageSendScreen extends StatelessWidget {
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Visibility(visible: false, child: Text("Null Text")),
-              Visibility(
-                  visible: true,
-                  child: SendAnnouncementToStudents()),
             ],
           )
       ),
+
+      floatingActionButton: const SendAnnouncementToStudents(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

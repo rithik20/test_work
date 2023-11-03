@@ -7,19 +7,21 @@ class SendAnnouncementToStudents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10.0),
+      height: MediaQuery.of(context).size.height / 5,
       decoration: const BoxDecoration(
         color: Colors.black12,
         borderRadius: BorderRadius.all(Radius.circular(20.0))
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          TextFormField(
-            maxLines: null,
-            decoration: const InputDecoration(
-              hintText: "Enter Your Announcement Here",
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(left: 12.0, right: 12.0),
+          Expanded(
+            child: TextFormField(
+              maxLines: null,
+              decoration: const InputDecoration(
+                hintText: "Enter Your Announcement Here",
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(left: 12.0, right: 12.0),
+              ),
             ),
           ),
           Row(
