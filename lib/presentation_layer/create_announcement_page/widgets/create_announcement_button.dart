@@ -1,5 +1,7 @@
+import 'package:class_alert/bloc_layer/send_messages_to_students/received_messages_stream/received_messages_stream_bloc.dart';
 import 'package:class_alert/presentation_layer/announcement_send_page/announcement_send_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///This [CreateAnnouncementButton] is for Creating Announcements for Students
 class CreateAnnouncementButton extends StatelessWidget {
@@ -7,6 +9,9 @@ class CreateAnnouncementButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final receivedMessageBloc = BlocProvider.of<ReceivedMessagesStreamBloc>(context);
+
     return Material(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -18,6 +23,7 @@ class CreateAnnouncementButton extends StatelessWidget {
             height: 30.0,
             elevation: 5.0,
             onPressed: () {
+              receivedMessageBloc.add(ReceivedMessage());
               ///when press this button navigate to the Announcements page
               Navigator.push(
                   context,
