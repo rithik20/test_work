@@ -13,8 +13,15 @@ class SendMessagesStreamBloc
       : super(SendMessagesStreamInitial()) {
     on<SendMessage>((event, emit) async {
       try {
-        await getIt<SendMessagesToStudentsStreamDataLayer>().sendMessagesToUser(event.message);
-        emit(MessageSendSuccess());
+        if(event.attachment == null) {
+          await getIt<SendMessagesToStudentsStreamDataLayer>()
+              .sendMessagesToUser(event.message);
+          emit(MessageSendSuccess());
+        }else{
+          await getIt<SendMessagesToStudentsStreamDataLayer>()
+              .sendMessagesToUser(event.message, event.attachment);
+          emit(MessageSendSuccess());
+        }
       } catch (_) {
         emit(MessageSendError());
       }

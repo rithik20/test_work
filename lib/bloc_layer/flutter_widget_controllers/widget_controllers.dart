@@ -5,6 +5,11 @@ class TextEditingControllers{
   TextEditingController sendMessage = TextEditingController();
 }
 
-void textControllers(){
+class ScrollControllers{
+  ScrollController chatScrollController = ScrollController();
+}
+
+void widgetControllers(){
   getIt.registerSingleton(TextEditingControllers());
+  getIt.registerSingleton(ScrollControllers());
 }

@@ -1,6 +1,7 @@
 import 'package:class_alert/bloc_layer/service_locators/get_it_service_locators.dart';
-import 'package:class_alert/bloc_layer/text_editing_controllers/text_editing_controllers.dart';
+import 'package:class_alert/bloc_layer/flutter_widget_controllers/widget_controllers.dart';
 import 'package:class_alert/presentation_layer/announcement_send_page/widgets/announcement_message_send_field/file_pick_attach_button/pick_files_attach_button.dart';
+import 'package:class_alert/presentation_layer/announcement_send_page/widgets/announcement_message_send_field/picked_item_name_show/picked_item_name_show.dart';
 import 'package:class_alert/presentation_layer/announcement_send_page/widgets/announcement_message_send_field/send_message_button/send_message_button.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,13 @@ class SendAnnouncementToStudents extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10.0),
       height: MediaQuery.of(context).size.height / 5,
-      decoration: const BoxDecoration(
-        color: Colors.black12,
-        borderRadius: BorderRadius.all(Radius.circular(20.0))
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomLeft:
+            Radius.circular(10.0))
       ),
       child: Column(
         children: [
@@ -34,6 +39,13 @@ class SendAnnouncementToStudents extends StatelessWidget {
             children: [
               ///This widget is for picking the Files from the device
               PickFilesAttachButton(),
+              SizedBox(
+                width: 5.0,
+              ),
+              Flexible(child: PickedItemName()),
+              SizedBox(
+                width: 5.0,
+              ),
               SendMessageButton(),
             ],
           ),

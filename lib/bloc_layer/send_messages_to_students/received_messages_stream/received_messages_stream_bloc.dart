@@ -13,6 +13,8 @@ class ReceivedMessagesStreamBloc
       : super(const ReceivedMessagesStreamInitial(messageFromOther: [])) {
     on<ReceivedMessage>((event, emit) async {
       try {
+        ///start the Stream
+        getIt<HiveMessageStreamBox>().setChatStream();
         await emit.forEach(getIt<HiveMessageStreamBox>().chatController.stream,
             onData: (data) {
           return MessageReceivedSuccessfully(messageFromOther: data);

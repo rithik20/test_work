@@ -5,5 +5,6 @@ abstract class SendMessagesStreamEvent {}
 
 class SendMessage extends SendMessagesStreamEvent{
   final String message;
-  SendMessage({required this.message});
+  final List<dynamic>? attachment;
+  SendMessage({required this.message, required this.attachment});
 }

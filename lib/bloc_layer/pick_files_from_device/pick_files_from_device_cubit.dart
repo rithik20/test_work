@@ -16,13 +16,17 @@ class PickFilesFromDeviceCubit extends Cubit<PickFilesFromDeviceState> {
       String? filePath =
           await getIt<PickFilesFromDeviceDataClass>().pickFilesFromDevice();
 
-      if(filePath != null){
+      if (filePath != null) {
         emit(FilePickedFromDeviceSuccessfully(filePath: filePath));
-      }else{
-        emit(const FilePickingFromDeviceError(filePath: null));
+      } else {
+        emit(const FilePickingFromDeviceError(filePath: ""));
       }
     } catch (_) {
-      emit(const FilePickingFromDeviceError(filePath: null));
+      emit(const FilePickingFromDeviceError(filePath: ""));
     }
+  }
+
+  void removePickedItem() {
+    emit(const PickedItemRemovedSuccessfully(filePath: ""));
   }
 }

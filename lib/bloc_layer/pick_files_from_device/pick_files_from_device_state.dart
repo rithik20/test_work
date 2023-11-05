@@ -2,7 +2,7 @@ part of 'pick_files_from_device_cubit.dart';
 
 @immutable
 abstract class PickFilesFromDeviceState {
-  final String? filePath;
+  final String filePath;
 
   const PickFilesFromDeviceState({required this.filePath});
 }
@@ -13,6 +13,10 @@ class PickFilesFromDeviceInitial extends PickFilesFromDeviceState {
 
 class FilePickedFromDeviceSuccessfully extends PickFilesFromDeviceState {
   const FilePickedFromDeviceSuccessfully({required super.filePath});
+}
+
+class PickedItemRemovedSuccessfully extends PickFilesFromDeviceState {
+  const PickedItemRemovedSuccessfully({required super.filePath});
 }
 
 class FilePickingFromDeviceError extends PickFilesFromDeviceState {

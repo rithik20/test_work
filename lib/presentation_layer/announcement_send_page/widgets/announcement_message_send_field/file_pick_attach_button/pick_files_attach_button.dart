@@ -1,5 +1,6 @@
 import 'package:class_alert/bloc_layer/permission_handler_bloc/storage_permission_logic/storage_permission_cubit.dart';
 import 'package:class_alert/bloc_layer/pick_files_from_device/pick_files_from_device_cubit.dart';
+import 'package:class_alert/bloc_layer/pick_files_from_device/picked_file_type_check/picked_file_type_check_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,12 +17,15 @@ class PickFilesAttachButton extends StatelessWidget {
     final storagePermissionCheck =
         BlocProvider.of<StoragePermissionStatusCubit>(context);
 
+    final fileTypeCheck = BlocProvider.of<PickedFileTypeCheckCubit>(context);
+
     return Material(
+      color: Colors.transparent,
       child: Container(
           padding: const EdgeInsets.only(right: 10.0),
-          decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          decoration: BoxDecoration(
+              color: Colors.grey[400],
+              borderRadius: const BorderRadius.all(Radius.circular(5.0))),
           child: Row(
             children: [
               IconButton(
@@ -40,6 +44,8 @@ class PickFilesAttachButton extends StatelessWidget {
                             .state.storagePermissionStatus ==
                         PermissionStatus.granted) {
                       await pickFiles.pickFilesFromDevice();
+
+                      fileTypeCheck.checkThisFileType(pickFiles.state.filePath);
                     }
                   },
                   icon: const Row(

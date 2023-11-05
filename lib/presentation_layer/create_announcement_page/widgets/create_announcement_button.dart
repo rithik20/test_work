@@ -1,5 +1,5 @@
 import 'package:class_alert/bloc_layer/send_messages_to_students/received_messages_stream/received_messages_stream_bloc.dart';
-import 'package:class_alert/presentation_layer/announcement_send_page/announcement_send_screen.dart';
+import 'package:class_alert/presentation_layer/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,14 +22,14 @@ class CreateAnnouncementButton extends StatelessWidget {
             color: Colors.purple,
             height: 30.0,
             elevation: 5.0,
-            onPressed: () {
+            onPressed: (){
               receivedMessageBloc.add(ReceivedMessage());
               ///when press this button navigate to the Announcements page
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          const AnnouncementMessageSendScreen()));
+                          const HomePage()));
             },
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0))),

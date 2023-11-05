@@ -1,28 +1,29 @@
-import 'package:class_alert/bloc_layer/appbar_tab_navigation/appbar_tab_navigation_cubit.dart';
-import 'package:class_alert/bloc_layer/attachment_view_bloc/pdf_view_bloc/pdf_view_bloc_cubit.dart';
 import 'package:class_alert/bloc_layer/delete_messages/delete_messages_cubit.dart';
-import 'package:class_alert/bloc_layer/like_messages/like_messages_cubit.dart';
 import 'package:class_alert/bloc_layer/permission_handler_bloc/storage_permission_logic/storage_permission_cubit.dart';
 import 'package:class_alert/bloc_layer/pick_files_from_device/pick_files_from_device_cubit.dart';
-import 'package:class_alert/bloc_layer/pick_files_from_device/picked_file_type_check/picked_file_type_check_cubit.dart';
 import 'package:class_alert/bloc_layer/send_messages_to_students/received_messages_stream/received_messages_stream_bloc.dart';
 import 'package:class_alert/bloc_layer/send_messages_to_students/send_messages_stream/send_messages_stream_bloc.dart';
 import 'package:class_alert/bloc_layer/service_locators/get_it_service_locators.dart';
 import 'package:class_alert/data_layer/local_database/initialize_hive_database.dart';
-import 'package:class_alert/presentation_layer/create_announcement_page/create_announcement_page.dart';
+import 'package:class_alert/data_layer/local_database/send_messages/send_messages_to_students.dart';
+import 'package:class_alert/presentation_layer/announcement_send_page/announcement_send_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-  ///initialize the permissionStatus late variable in the
-  ///bloc_layer/permission_handler_bloc/storage_permission_logic/storage_permission_cubit.dart
-  ///file
-  ///
-  permissionStatus = await Permission.storage.status;
+  serviceLocators();
+
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          (MethodCall methodCall) async {
+    return '.';
+  });
 
   ///Initialize Hive database
   await Hive.initFlutter();
@@ -33,34 +34,20 @@ Future<void> main() async {
   ///open [testDatabase] box using the [InitializeHiveBox] class's object
   testDatabase = await initializeHiveBox.initializeHiveDatabase();
 
-  ///call the [serviceLocators] global method to register all get_it dependencies
-  serviceLocators();
+  getIt<HiveMessageStreamBox>().setChatStream();
 
-  runApp(const ClassAlert());
-}
-
-class ClassAlert extends StatelessWidget {
-  const ClassAlert({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
+  testWidgets("Announcement Send Screen Test", (widgetTester) async {
+    await widgetTester.pumpWidget(MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => StoragePermissionStatusCubit()),
         BlocProvider(create: (context) => PickFilesFromDeviceCubit()),
-        BlocProvider(create: (context) => PickedFileTypeCheckCubit()),
         BlocProvider(create: (context) => SendMessagesStreamBloc()),
         BlocProvider(create: (context) => ReceivedMessagesStreamBloc()),
         BlocProvider(create: (context) => DeleteMessagesCubit()),
-        BlocProvider(create: (context) => LikeMessagesCubit()),
-        BlocProvider(create: (context) => AppbarTabNavigationCubit()),
-        BlocProvider(create: (context) => PdfViewBlocCubit()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(useMaterial3: true),
-        home: const CreateAnnouncementButtonPage(),
+      child: const MaterialApp(
+        home: AnnouncementMessageSendScreen(),
       ),
-    );
-  }
+    ));
+  });
 }
