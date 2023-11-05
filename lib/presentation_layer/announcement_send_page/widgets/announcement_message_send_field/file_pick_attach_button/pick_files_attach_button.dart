@@ -49,7 +49,8 @@ class PickFilesAttachButton extends StatelessWidget {
                     }
                   },
                   icon: const Row(
-                    children: [Icon(Icons.attach_file), Text("Attach File")],
+                    mainAxisSize: MainAxisSize.min,
+                    children: [Icon(Icons.attach_file), Flexible(child: Text("Attach File"))],
                   )),
             ],
           )),

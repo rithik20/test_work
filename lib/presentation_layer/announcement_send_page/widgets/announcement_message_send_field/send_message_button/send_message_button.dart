@@ -25,34 +25,37 @@ class SendMessageButton extends StatelessWidget {
     return Container(
         decoration:
             const BoxDecoration(color: Colors.purple, shape: BoxShape.circle),
-        child: IconButton(
-            onPressed: () async {
-              ///When pressing this Button the User can send the Message
-              ///firstly check if there is any value presented
-              if (textControllers.sendMessage.value.text.isNotEmpty) {
-                if(selectedFile.state.filePath.isEmpty) {
-                  sendMessage.add(SendMessage(
-                      message: textControllers.sendMessage.value.text,
-                      attachment: const []));
-                }else{
-                  sendMessage.add(SendMessage(
-                      message: textControllers.sendMessage.value.text,
-                      attachment: [{
-                        "fileName": selectedFile.state.filePath.split(Platform.pathSeparator).last,
-                        "filePath": selectedFile.state.filePath,
-                        "fileType": sendAttach.state.selectedFileType,
-                      }]));
+        child: Material(
+          color: Colors.transparent,
+          child: IconButton(
+              onPressed: () async {
+                ///When pressing this Button the User can send the Message
+                ///firstly check if there is any value presented
+                if (textControllers.sendMessage.value.text.isNotEmpty) {
+                  if(selectedFile.state.filePath.isEmpty) {
+                    sendMessage.add(SendMessage(
+                        message: textControllers.sendMessage.value.text,
+                        attachment: const []));
+                  }else{
+                    sendMessage.add(SendMessage(
+                        message: textControllers.sendMessage.value.text,
+                        attachment: [{
+                          "fileName": selectedFile.state.filePath.split(Platform.pathSeparator).last,
+                          "filePath": selectedFile.state.filePath,
+                          "fileType": sendAttach.state.selectedFileType,
+                        }]));
+                  }
                 }
-              }
 
-              ///also clear the Values after the Message Send
-              textControllers.sendMessage.clear();
-              selectedFile.removePickedItem();
-              sendAttach.resetFileType();
-            },
-            icon: const Icon(
-              Icons.send,
-              color: Colors.white,
-            )));
+                ///also clear the Values after the Message Send
+                textControllers.sendMessage.clear();
+                selectedFile.removePickedItem();
+                sendAttach.resetFileType();
+              },
+              icon: const Icon(
+                Icons.send,
+                color: Colors.white,
+              )),
+        ));
   }
 }

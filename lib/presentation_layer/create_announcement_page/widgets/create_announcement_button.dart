@@ -13,6 +13,7 @@ class CreateAnnouncementButton extends StatelessWidget {
     final receivedMessageBloc = BlocProvider.of<ReceivedMessagesStreamBloc>(context);
 
     return Material(
+      color: Colors.transparent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

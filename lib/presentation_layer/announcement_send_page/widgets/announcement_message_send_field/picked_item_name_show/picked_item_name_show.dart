@@ -18,6 +18,7 @@ class PickedItemName extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: BlocBuilder<PickFilesFromDeviceCubit, PickFilesFromDeviceState>(
+        key: const Key("Picked File Item Name Bloc"),
         builder: (context, state) {
           if (state.filePath.isNotEmpty) {
             return Row(

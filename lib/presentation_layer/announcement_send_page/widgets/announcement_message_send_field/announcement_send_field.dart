@@ -21,35 +21,38 @@ class SendAnnouncementToStudents extends StatelessWidget {
             bottomLeft:
             Radius.circular(10.0))
       ),
-      child: Column(
-        children: [
-          Expanded(
-            child: TextFormField(
-              controller: getIt<TextEditingControllers>().sendMessage,
-              maxLines: null,
-              decoration: const InputDecoration(
-                hintText: "Enter Your Announcement Here",
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 12.0, right: 12.0),
+      child: Material(
+        color: Colors.transparent,
+        child: Column(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: getIt<TextEditingControllers>().sendMessage,
+                maxLines: null,
+                decoration: const InputDecoration(
+                  hintText: "Enter Your Announcement Here",
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(left: 12.0, right: 12.0),
+                ),
               ),
             ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ///This widget is for picking the Files from the device
-              PickFilesAttachButton(),
-              SizedBox(
-                width: 5.0,
-              ),
-              Flexible(child: PickedItemName()),
-              SizedBox(
-                width: 5.0,
-              ),
-              SendMessageButton(),
-            ],
-          ),
-        ],
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ///This widget is for picking the Files from the device
+                PickFilesAttachButton(),
+                SizedBox(
+                  width: 5.0,
+                ),
+                Flexible(child: PickedItemName()),
+                SizedBox(
+                  width: 5.0,
+                ),
+                SendMessageButton(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

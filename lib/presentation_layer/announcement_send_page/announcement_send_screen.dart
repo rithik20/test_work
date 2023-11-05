@@ -7,22 +7,20 @@ class AnnouncementMessageSendScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white,
-            child: const Column(
-              children: [
-                ///The Messages List is Rebuild whenever a new message from the
-                ///Sender
-                MessagesShowWidget(),
-                SendAnnouncementToStudents()
-              ],
-            )),
-      ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          child: const Column(
+            children: [
+              ///The Messages List is Rebuild whenever a new message from the
+              ///Sender
+              MessagesShowWidget(),
+              SendAnnouncementToStudents()
+            ],
+          )),
     );
   }
 }
