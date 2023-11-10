@@ -10,17 +10,11 @@ class AnnouncementMessageSendScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           width: MediaQuery.of(context).size.width,
-          color: Colors.white,
-          child: const Column(
-            children: [
-              ///The Messages List is Rebuild whenever a new message from the
-              ///Sender
-              MessagesShowWidget(),
-              SendAnnouncementToStudents()
-            ],
-          )),
+          height: MediaQuery.of(context).size.height,
+          child: const MessagesShowWidget()),
+      bottomNavigationBar: const SendAnnouncementToStudents(),
     );
   }
 }

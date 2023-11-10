@@ -14,11 +14,12 @@ class AnnouncementSessions extends StatelessWidget {
     return Material(
         color: Colors.transparent,
         child: BlocBuilder<AppbarTabNavigationCubit, AppbarTabNavigationState>(
+          key: const Key("AppbarTabNavigationCubit"),
           builder: (context, appbarTab) {
             return Row(
               children: [
-                TextButton(
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     appTabBarNavigation.navigateToAnnouncementTab();
                   },
                   child: appbarTab.index == 0
@@ -42,8 +43,11 @@ class AnnouncementSessions extends StatelessWidget {
                               color: Colors.purple,
                               fontWeight: FontWeight.w500)),
                 ),
-                TextButton(
-                  onPressed: () {
+                const SizedBox(
+                  width: 10.0,
+                ),
+                InkWell(
+                  onTap: () {
                     appTabBarNavigation.navigateToNotesTab();
                   },
                   child: appbarTab.index == 1

@@ -15,7 +15,9 @@ class StudentNotesPage extends StatelessWidget {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: BlocBuilder<ReceivedMessagesStreamBloc,
-            ReceivedMessagesStreamState>(builder: (context, attachList) {
+            ReceivedMessagesStreamState>(
+          key: const Key("Notes Page ReceivedMessagesStreamBloc"),
+            builder: (context, attachList) {
           return Column(
             children: [
               Container(
